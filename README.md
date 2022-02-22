@@ -11,6 +11,3 @@ It's a little project where the intention is to count how much time is left unti
 it's a simple project created from a day of boredom where I put some knowledge to the test.🍔
 
 --------------------------------------------------------------------------------------------------------
-
-Projeto pode ser encontrado aqui | Project can be found here:
-https://newyearseve.000webhostapp.com

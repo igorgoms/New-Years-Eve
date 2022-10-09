@@ -11,3 +11,6 @@ It's a little project where the intention is to count how much time is left unti
 it's a simple project created from a day of boredom where I put some knowledge to the test.🍔
 
 --------------------------------------------------------------------------------------------------------
+
+# Link
+https://igorgoms.github.io/New-Years-Eve/

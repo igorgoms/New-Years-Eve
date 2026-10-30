@@ -3,47 +3,33 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Contagem regressiva mágica para a véspera de Ano Novo. Site e Design por Igor Gomes." />
-        <meta name="theme-color" content="#1A2536" />
-        
-        <title>New Years Eve | Countdown Timer</title>
-        
-        <!-- Google Fonts: Poppins (mantendo a originalidade do projeto) -->
+        <meta name="description" content="Countdown Timer para a véspera de Ano Novo. Site e Design por Igor Gomes. Imagem por Gabriel." />
+        <meta name="theme-color" content="#1a2536" />
+        <title>Countdown Timer | New Years Eve</title>
+
+        <!-- Google Fonts: Poppins (original) -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
-        
-        <!-- Stylesheet -->
-        <link rel="stylesheet" href="style.css" />
-        
-        <!-- Script -->
-        <script src="script.js" defer></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+        <!-- Stylesheet com cache-buster -->
+        <link rel="stylesheet" href="style.css?v=3.0" />
+
+        <!-- Script com cache-buster -->
+        <script src="script.js?v=3.0" defer></script>
     </head>
     <body>
-        <!-- Canvas para efeito de neve suave caindo -->
+        <!-- Canvas para efeito sutil de neve caindo em segundo plano -->
         <canvas id="snow-canvas" aria-hidden="true"></canvas>
 
-        <!-- Controles sutis no topo -->
-        <div class="top-controls">
-            <button id="btn-toggle-bg" class="control-btn" title="Alternar imagem de fundo" aria-label="Trocar imagem de fundo">
-                <span>🖼️ Fundo</span>
-            </button>
-            <button id="btn-toggle-snow" class="control-btn" title="Ligar/Desligar neve" aria-label="Alternar neve">
-                <span>❄️ Neve</span>
-            </button>
-        </div>
-
-        <div class="main-content">
-            <!-- Cabeçalho -->
+        <main class="content-wrapper">
+            <!-- Título original -->
             <header>
-                <div class="badge">
-                    <span>✨ Contagem Regressiva</span>
-                </div>
-                <h1 id="main-title">New Years Eve</h1>
-                <p class="subtitle" id="target-year-display">Rumo ao Ano Novo</p>
+                <h1 id="title">New Years Eve</h1>
+                <p class="subtitle" id="target-year">Contagem regressiva para o Ano Novo</p>
             </header>
 
-            <!-- Container do Contador (classes e IDs originais 100% preservados) -->
+            <!-- Container do Contador (IDs e classes originais 100% preservados) -->
             <div class="countdown-container">
                 <div class="countdown-el days-c">
                     <p class="big-text" id="days">0</p>
@@ -55,36 +41,20 @@
                 </div>
                 <div class="countdown-el mins-c">
                     <p class="big-text" id="mins">00</p>
-                    <span>minutos</span>
+                    <span>min</span>
                 </div>
                 <div class="countdown-el seconds-c">
                     <p class="big-text" id="seconds">00</p>
-                    <span>segundos</span>
+                    <span>seg</span>
                 </div>
             </div>
+        </main>
 
-            <!-- Barra de Progresso do Ano Atual -->
-            <div class="progress-box">
-                <div class="progress-header">
-                    <span id="progress-label">Progresso do ano:</span>
-                    <strong id="progress-percentage">0%</strong>
-                </div>
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" id="progress-fill"></div>
-                </div>
-            </div>
-
-            <!-- Frase inspiradora de Ano Novo -->
-            <p class="new-year-quote" id="quote-text">
-                "Que o próximo ano traga novas oportunidades, grandes conquistas e momentos inesquecíveis."
-            </p>
-        </div>
-
-        <!-- Rodapé (créditos originais preservados com design refinado) -->
+        <!-- Rodapé original preservado e centralizado -->
         <div class="end">
             <footer>
                 <p>Image By <strong>Gabriel</strong></p>
-                <p class="divider">•</p>
+                <span class="sep">•</span>
                 <p>Site and Design By <strong>Igor Gomes</strong></p>
             </footer>
         </div>

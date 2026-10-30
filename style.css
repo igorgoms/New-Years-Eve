@@ -1,51 +1,330 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+/*==============================================================
+   New Years Eve - Countdown Timer
+   Estética de Inverno & Glassmorphism Refinado
+==============================================================*/
 
-* {
- box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/*======= Reset & Box Sizing =======*/
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/*======= Body & Imagem de Fundo Original =======*/
 body {
-    background-image: url('./images/snowl-by-gabriel.jpg');
+    background-image: linear-gradient(
+        180deg,
+        rgba(10, 16, 26, 0.45) 0%,
+        rgba(10, 16, 26, 0.65) 100%
+    ), url('./images/snowl-by-gabriel.jpg');
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-image 0.6s ease-in-out;
+    padding: 1.5rem 1rem;
+}
+
+/* Modo alternativo de fundo */
+body.bg-alt {
+    background-image: linear-gradient(
+        180deg,
+        rgba(10, 16, 26, 0.45) 0%,
+        rgba(10, 16, 26, 0.65) 100%
+    ), url('./images/snow.jpg');
+}
+
+/*======= Canvas de Neve Suave =======*/
+#snow-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/*======= Controles no Topo =======*/
+.top-controls {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    gap: 0.65rem;
+    z-index: 10;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    padding: 0.45rem 0.85rem;
+    border-radius: 2rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/*======= Conteúdo Principal =======*/
+.main-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    font-family: "Poppins", sans-serif;
-    margin: 0;
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* Cabeçalho */
+header {
+    margin-bottom: 2.5rem;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0.35rem 1.15rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.85rem;
+    text-transform: uppercase;
 }
 
 h1 {
-    font-weight: normal;
-    font-size: 4rem;
-    margin-top: 5rem;
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
 }
 
+.subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
+}
+
+/*======= Container dos Cards de Contagem =======*/
 .countdown-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+/* Cards com Efeito de Vidro Fosco (Glassmorphism) */
+.countdown-el {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 1.5rem;
+    padding: 1.75rem 1.5rem;
+    min-width: 135px;
+    flex: 1 1 140px;
+    max-width: 200px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-el::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.countdown-el:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
 }
 
 .big-text {
-    font-weight: bold;
-    font-size: 6rem;
+    font-size: clamp(3rem, 7vw, 5.25rem);
+    font-weight: 700;
     line-height: 1;
-    margin: 1rem 2rem;
-}
-
-.countdown-el {
-    text-align: center;
+    margin: 0.5rem 0;
+    color: #FFFFFF;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    font-variant-numeric: tabular-nums;
 }
 
 .countdown-el span {
-    font-size: 1.3rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.85);
+    display: block;
 }
 
-.end{
- font-size: 1rem;
- font-weight: 400;
- text-align: center;
- padding-top: 7rem;
+/*======= Barra de Progresso do Ano =======*/
+.progress-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.25rem;
+    padding: 1.15rem 1.5rem;
+    width: 100%;
+    max-width: 580px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.65rem;
+    font-weight: 400;
+}
+
+.progress-header strong {
+    color: #FFE699;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #64B5F6 0%, #E0F7FA 50%, #FFE699 100%);
+    border-radius: 1rem;
+    transition: width 1s ease-in-out;
+    box-shadow: 0 0 12px rgba(255, 230, 153, 0.5);
+}
+
+/* Frase Inspiradora */
+.new-year-quote {
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 650px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    line-height: 1.6;
+}
+
+/*======= Rodapé (End / Footer) =======*/
+.end {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem 1rem 1rem 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+footer p {
+    margin: 0;
+}
+
+footer strong {
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+footer .divider {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/*======= Responsividade Mobile =======*/
+@media (max-width: 640px) {
+    .countdown-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        max-width: 380px;
+    }
+
+    .countdown-el {
+        max-width: none;
+        padding: 1.25rem 0.75rem;
+    }
+
+    .big-text {
+        font-size: 3rem;
+    }
+
+    .top-controls {
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .control-btn {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.75rem;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    footer .divider {
+        display: none;
+    }
 }
